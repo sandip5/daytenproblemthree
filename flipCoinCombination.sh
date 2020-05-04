@@ -12,34 +12,38 @@ counter=0;
 
 while (( $count>0 ))
 do
-for (( i=0; i<2; i++ ))
-do
-	randomCheck=$(( RANDOM%2 ))
-	if [[ $randomCheck -eq $isHeads ]]
-	then
-		((numberOfHeads++))
-		winHead="H";
-		array[((arrayCount++))]="$winHead"
-	else
-		((numberOfTails++))
-		winTail="T";
-		array[((arrayCount++))]="$winTail"
-	fi
-done
+	for (( i=0; i<2; i++ ))
+	do
+		randomCheck=$(( RANDOM%2 ))
+		if [[ $randomCheck -eq $isHeads ]]
+		then
+			((numberOfHeads++))
+			winHead="H";
+			array[((arrayCount++))]="$winHead"
+		else
+			((numberOfTails++))
+			winTail="T";
+			array[((arrayCount++))]="$winTail"
+		fi
+	done
 count=$(( $count - 2 ))
 echo "${array[@]}"
 store["$counter"]="${array[@]:(-2)}"
 counter=$(( $counter + 1 ))
 done
+
 echo "${store[@]}"
+
 comboOne="H H"
 comboTwo="T T"
 comboThree="H T"
 comboFour="T H"
+
 comboOneCounter=0;
 comboTwoCounter=0;
 comboThreeCounter=0;
 comboFourCounter=0;
+
 for j in "${store[@]}"
 do
 	if [[ "$j" == "$comboOne" ]]
