@@ -5,21 +5,28 @@ isHeads=0;
 isTails=1;
 numberOfHeads=0;
 numberOfTails=0;
+j=0;
 count=$totalTimes
 counter=0;
 while (( $count>0 ))
+do
+for (( i=0; i<2; i++ ))
 do
 	randomCheck=$(( RANDOM%2 ))
 	if [[ $randomCheck -eq $isHeads ]]
 	then
 		((numberOfHeads++))
-		winFace="H";
+		winHead="H";
+		array[((j++))]="$winHead"
 	else
 		((numberOfTails++))
-		winFace="T";
+		winTail="T";
+		array[((j++))]="$winTail"
 	fi
-	((count--))
-store["$counter"]="$winFace"
+done
+	count=$(( $count - 2 ))
+echo "${array[@]}"
+store["$counter"]="${array[@]:(-2)}"
 counter=$(( $counter + 1 ))
 done
 echo "${store[@]}"
